@@ -2,7 +2,6 @@ package com.helloworld.handler;
 
 import java.util.function.Function;
 
-import io.lightflame.util.FlameHttpUtils;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
@@ -18,10 +17,10 @@ import static io.netty.handler.codec.http.HttpVersion.*;
 public class HelloWorldHandler {
 
 
-    Function<FullHttpRequest,FullHttpResponse> sayHello() {
+    Function<FullHttpRequest,FullHttpResponse> simpleSayHello() {
         return (request) -> {
-            String name = FlameHttpUtils.extractQueryParam(request);
-            String greeting = String.format("Hello %s =)", name);
+            String name = request.content().toString(CharsetUtil.UTF_8);
+            String greeting = String.format("hello %s", name);
             return new DefaultFullHttpResponse(
                 HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8));
         };

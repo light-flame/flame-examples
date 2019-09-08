@@ -17,7 +17,7 @@ public class HandlerConfig {
 
             // flame store
             new FlameHttpStore("/api")
-                .httpGET("/hello", helloHandler.sayHello());
+                .httpGET("/hello/simple", helloHandler.simpleSayHello());
 
             // exception store
             new FlameExceptionStore()

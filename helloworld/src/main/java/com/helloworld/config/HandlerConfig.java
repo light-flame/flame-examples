@@ -18,8 +18,8 @@ public class HandlerConfig {
             // flame store
             FlameHttpStore fs =  new FlameHttpStore("/api");
 
-            fs.httpPOST("/hello/simple", helloHandler.simpleGreeting());
-            fs.httpGET("/hello/greeting/{name}", helloHandler.simpleGreeting());
+            fs.httpGET("/hello/simple", helloHandler.simpleGreeting());
+            fs.httpGET("/hello/greeting/{name}", helloHandler.greetingWithPathParam());
 
             // exception store
             new FlameExceptionStore()

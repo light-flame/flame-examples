@@ -26,6 +26,16 @@ public class HelloWorldHandler {
         };
     }
 
+    public Function<FlameHttpContext,FlameHttpContext> greetingWithPathParam() {
+        return (ctx) -> {
+            String name = ctx.getPathParamByName("name");
+            String greeting = String.format("hello %s", name);
+            FullHttpResponse res =  new DefaultFullHttpResponse(
+                HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8));
+            return ctx.setResponse(res);
+        };
+    }
+
 
     public Function<FlameHttpContext,FlameHttpContext> simpleGreeting() {
         return (ctx) -> {

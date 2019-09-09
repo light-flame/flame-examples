@@ -45,9 +45,26 @@ public class TestingHelloWorld {
     public void simpleHelloWorld(){
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
-                HttpMethod.POST, 
+                HttpMethod.GET, 
                 "/api/hello/simple",
                 Unpooled.copiedBuffer("Daniel", CharsetUtil.UTF_8)
+        );
+        // httpRequest.headers().add("name", "Daniel");
+        channel.writeInbound(httpRequest);
+
+        // get response
+        FullHttpResponse ctx = channel.readOutbound();
+        String msg = ctx.content().toString(CharsetUtil.UTF_8);
+        assertEquals(msg.equals("hello Daniel"), true);
+
+    }
+
+    @Test
+    public void simpleHelloGreeting(){
+        FullHttpRequest httpRequest = new DefaultFullHttpRequest(
+                HttpVersion.HTTP_1_1, 
+                HttpMethod.GET, 
+                "/api/hello/greeting/Daniel"
         );
         // httpRequest.headers().add("name", "Daniel");
         channel.writeInbound(httpRequest);

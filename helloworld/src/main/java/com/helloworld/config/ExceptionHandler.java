@@ -1,4 +1,4 @@
-package com.helloworld.handler;
+package com.helloworld.config;
 
 import io.lightflame.functions.ExceptionHttpFunction;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;

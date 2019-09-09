@@ -1,9 +1,9 @@
-package com.helloworld.handler;
+package com.helloworld.config;
 
 import com.helloworld.handler.HelloWorldHandler;
 
-import io.lightflame.bean.FlameExceptionStore;
-import io.lightflame.bean.FlameHttpStore;
+import io.lightflame.store.FlameExceptionStore;
+import io.lightflame.store.FlameHttpStore;
 import io.lightflame.functions.ConfigFunction;
 
 /**
@@ -16,8 +16,10 @@ public class HandlerConfig {
             HelloWorldHandler helloHandler = new HelloWorldHandler();
 
             // flame store
-            new FlameHttpStore("/api")
-                .httpGET("/hello/simple", helloHandler.simpleSayHello());
+            FlameHttpStore fs =  new FlameHttpStore("/api");
+
+            fs.httpPOST("/hello/simple", helloHandler.simpleGreeting());
+            fs.httpGET("/hello/greeting/{name}", helloHandler.simpleGreeting());
 
             // exception store
             new FlameExceptionStore()

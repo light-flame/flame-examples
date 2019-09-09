@@ -2,6 +2,8 @@ package com.helloworld.handler;
 
 import java.util.function.Function;
 
+import com.helloworld.model.Greeting;
+
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
@@ -16,8 +18,16 @@ import static io.netty.handler.codec.http.HttpVersion.*;
  */
 public class HelloWorldHandler {
 
+    public Function<Greeting,FullHttpResponse> inboundGreeting() {
+        return (greeting) -> {
+            String msg = String.format("hello %s", greeting.getName());
+            return new DefaultFullHttpResponse(
+                HTTP_1_1,OK, Unpooled.copiedBuffer(msg, CharsetUtil.UTF_8));
+        };
+    }
 
-    Function<FullHttpRequest,FullHttpResponse> simpleSayHello() {
+
+    public Function<FullHttpRequest,FullHttpResponse> simpleGreeting() {
         return (request) -> {
             String name = request.content().toString(CharsetUtil.UTF_8);
             String greeting = String.format("hello %s", name);

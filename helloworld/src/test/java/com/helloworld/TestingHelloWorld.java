@@ -53,8 +53,8 @@ public class TestingHelloWorld {
         channel.writeInbound(httpRequest);
 
         // get response
-        FullHttpResponse resp = channel.readOutbound();
-        String msg = resp.content().toString(CharsetUtil.UTF_8);
+        FullHttpResponse ctx = channel.readOutbound();
+        String msg = ctx.content().toString(CharsetUtil.UTF_8);
         assertEquals(msg.equals("hello Daniel"), true);
 
     }

@@ -4,9 +4,9 @@ import java.util.function.Function;
 
 import com.helloworld.model.Greeting;
 
+import io.lightflame.context.FlameHttpContext;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.util.CharsetUtil;
 
@@ -27,12 +27,13 @@ public class HelloWorldHandler {
     }
 
 
-    public Function<FullHttpRequest,FullHttpResponse> simpleGreeting() {
-        return (request) -> {
-            String name = request.content().toString(CharsetUtil.UTF_8);
+    public Function<FlameHttpContext,FlameHttpContext> simpleGreeting() {
+        return (ctx) -> {
+            String name = ctx.getRequest().content().toString(CharsetUtil.UTF_8);
             String greeting = String.format("hello %s", name);
-            return new DefaultFullHttpResponse(
+            FullHttpResponse res =  new DefaultFullHttpResponse(
                 HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8));
+            return ctx.setResponse(res);
         };
     }
 }

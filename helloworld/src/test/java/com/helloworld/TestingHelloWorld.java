@@ -46,33 +46,77 @@ public class TestingHelloWorld {
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
                 HttpMethod.GET, 
-                "/api/hello/simple",
-                Unpooled.copiedBuffer("Daniel", CharsetUtil.UTF_8)
+                "/api/hello/world/simple",
+                Unpooled.copiedBuffer("world", CharsetUtil.UTF_8)
         );
-        // httpRequest.headers().add("name", "Daniel");
         channel.writeInbound(httpRequest);
 
         // get response
         FullHttpResponse ctx = channel.readOutbound();
         String msg = ctx.content().toString(CharsetUtil.UTF_8);
-        assertEquals(msg.equals("hello Daniel"), true);
+        assertEquals(msg.equals("hello world"), true);
 
     }
 
     @Test
-    public void simpleHelloGreeting(){
+    public void simpleHelloUrlParam(){
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
                 HttpMethod.GET, 
-                "/api/hello/greeting/Daniel"
+                "/api/hello/world"
         );
-        // httpRequest.headers().add("name", "Daniel");
         channel.writeInbound(httpRequest);
 
         // get response
         FullHttpResponse ctx = channel.readOutbound();
         String msg = ctx.content().toString(CharsetUtil.UTF_8);
-        assertEquals(msg.equals("hello Daniel"), true);
+        assertEquals(msg.equals("hello world"), true);
 
+    }
+
+    @Test
+    public void simpleHelloQueryParam(){
+        FullHttpRequest httpRequest = new DefaultFullHttpRequest(
+                HttpVersion.HTTP_1_1, 
+                HttpMethod.GET, 
+                "/api/hello/greeting/with/param?what=world"
+        );
+        channel.writeInbound(httpRequest);
+
+        // get response
+        FullHttpResponse ctx = channel.readOutbound();
+        String msg = ctx.content().toString(CharsetUtil.UTF_8);
+        assertEquals(msg.equals("hello world"), true);
+    }
+
+    @Test
+    public void wideCardUrl(){
+        FullHttpRequest httpRequest = new DefaultFullHttpRequest(
+                HttpVersion.HTTP_1_1, 
+                HttpMethod.GET, 
+                "/api/hello/with/generic?what=world"
+        );
+        channel.writeInbound(httpRequest);
+
+        // get response
+        FullHttpResponse ctx = channel.readOutbound();
+        String msg = ctx.content().toString(CharsetUtil.UTF_8);
+        assertEquals(msg.equals("hello world"), true);
+    }
+
+    @Test
+    public void headerParam(){
+        FullHttpRequest httpRequest = new DefaultFullHttpRequest(
+                HttpVersion.HTTP_1_1, 
+                HttpMethod.GET, 
+                "/api/hello/with/header"
+        );
+        httpRequest.headers().add("what", "world");
+        channel.writeInbound(httpRequest);
+
+        // get response
+        FullHttpResponse ctx = channel.readOutbound();
+        String msg = ctx.content().toString(CharsetUtil.UTF_8);
+        assertEquals(msg.equals("hello world"), true);
     }
 }

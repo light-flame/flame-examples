@@ -1,49 +1,52 @@
 package com.helloworld.handler;
 
-import java.util.function.Function;
+import static io.netty.handler.codec.http.HttpResponseStatus.OK;
+import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
-import com.helloworld.model.Greeting;
-
-import io.lightflame.context.FlameHttpContext;
+import io.lightflame.functions.FlameHttpFunction;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.util.CharsetUtil;
-
-import static io.netty.handler.codec.http.HttpResponseStatus.*;
-import static io.netty.handler.codec.http.HttpVersion.*;
 
 /**
  * HelloWorldHandler
  */
 public class HelloWorldHandler {
 
-    public Function<Greeting,FullHttpResponse> inboundGreeting() {
-        return (greeting) -> {
-            String msg = String.format("hello %s", greeting.getName());
-            return new DefaultFullHttpResponse(
-                HTTP_1_1,OK, Unpooled.copiedBuffer(msg, CharsetUtil.UTF_8));
-        };
-    }
 
-    public Function<FlameHttpContext,FlameHttpContext> greetingWithPathParam() {
-        return (ctx) -> {
-            String name = ctx.getPathParamByName("name");
-            String greeting = String.format("hello %s", name);
-            FullHttpResponse res =  new DefaultFullHttpResponse(
-                HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8));
-            return ctx.setResponse(res);
-        };
-    }
-
-
-    public Function<FlameHttpContext,FlameHttpContext> simpleGreeting() {
+    public FlameHttpFunction simpleGreeting() {
         return (ctx) -> {
             String name = ctx.getRequest().content().toString(CharsetUtil.UTF_8);
             String greeting = String.format("hello %s", name);
-            FullHttpResponse res =  new DefaultFullHttpResponse(
-                HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8));
-            return ctx.setResponse(res);
+            return ctx.setResponse(new DefaultFullHttpResponse(
+                HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8)));
+        };
+    }
+
+    public FlameHttpFunction greetingWithPathParam() {
+        return (ctx) -> {
+            String name = ctx.getPathParam("what");
+            String greeting = String.format("hello %s", name);
+            return ctx.setResponse(new DefaultFullHttpResponse(
+                HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8)));
+        };
+    }
+
+    public FlameHttpFunction greetingWithQueryUrl() {
+        return (ctx) -> {
+            String name = ctx.getQueryUrl("what");
+            String greeting = String.format("hello %s", name);
+            return ctx.setResponse(new DefaultFullHttpResponse(
+                HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8)));
+        };
+    }
+
+    public FlameHttpFunction greetingWithHeader() {
+        return (ctx) -> {
+            String name = ctx.getHeaders().get("what");
+            String greeting = String.format("hello %s", name);
+            return ctx.setResponse(new DefaultFullHttpResponse(
+                HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8)));
         };
     }
 }

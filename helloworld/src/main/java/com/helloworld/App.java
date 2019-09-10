@@ -1,6 +1,7 @@
 package com.helloworld;
 
-import com.helloworld.handler.HandlerConfig;
+
+import com.helloworld.config.HandlerConfig;
 
 import io.lightflame.bootstrap.LightFlame;
 

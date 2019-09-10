@@ -2,9 +2,9 @@ package com.helloworld.config;
 
 import com.helloworld.handler.HelloWorldHandler;
 
+import io.lightflame.functions.ConfigFunction;
 import io.lightflame.store.FlameExceptionStore;
 import io.lightflame.store.FlameHttpStore;
-import io.lightflame.functions.ConfigFunction;
 
 /**
  * DefaultConfig
@@ -18,8 +18,11 @@ public class HandlerConfig {
             // flame store
             FlameHttpStore fs =  new FlameHttpStore("/api");
 
-            fs.httpGET("/hello/simple", helloHandler.simpleGreeting());
-            fs.httpGET("/hello/greeting/{name}", helloHandler.greetingWithPathParam());
+            fs.httpGET("/hello/world/simple", helloHandler.simpleGreeting());
+            fs.httpGET("/hello/{what}", helloHandler.greetingWithPathParam());
+            fs.httpGET("/hello/greeting/with/param", helloHandler.greetingWithQueryUrl());
+            fs.httpGET("/hello/with/header", helloHandler.greetingWithHeader());
+            fs.httpGET("/hello/*", helloHandler.greetingWithQueryUrl());
 
             // exception store
             new FlameExceptionStore()

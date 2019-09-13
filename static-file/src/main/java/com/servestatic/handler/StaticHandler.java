@@ -2,12 +2,7 @@ package com.servestatic.handler;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Optional;
 
-import io.lightflame.context.FlameHttpContext;
 import io.lightflame.functions.FlameHttpFunction;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -31,20 +26,12 @@ public class StaticHandler {
 
     public FlameHttpFunction loadingResourceStaticFunc() {
         return (ctx) -> {
-            try {
-                return loadingResourceStatic(ctx);
-            }catch(Exception e){
-                throw new RuntimeException(e);
-            }
+            File file = new File(getClass().getClassLoader().getResource("index.html").getFile());
+            FileInputStream inFile = new FileInputStream(file);
+            ByteBuf b = Unpooled.copiedBuffer(inFile.readAllBytes());
+            inFile.close();
+            return ctx.setResponse(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, b));
         };
-    }
-
-    public FlameHttpContext loadingResourceStatic(FlameHttpContext ctx)throws IOException {
-        File file = new File(getClass().getClassLoader().getResource("index.html").getFile());
-        FileInputStream inFile = new FileInputStream(file);
-        ByteBuf b = Unpooled.copiedBuffer(inFile.readAllBytes());
-        inFile.close();
-        return ctx.setResponse(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, b));
     }
 
 

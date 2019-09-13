@@ -43,7 +43,7 @@ public class HelloWorldHandler {
 
     public FlameHttpFunction greetingWithHeader() {
         return (ctx) -> {
-            String name = ctx.getHeaders().get("what");
+            String name = ctx.getRequest().headers().get("what");
             String greeting = String.format("hello %s", name);
             return ctx.setResponse(new DefaultFullHttpResponse(
                 HTTP_1_1,OK, Unpooled.copiedBuffer(greeting, CharsetUtil.UTF_8)));

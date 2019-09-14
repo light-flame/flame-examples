@@ -34,5 +34,21 @@ public class StaticHandler {
         };
     }
 
+    public FlameHttpFunction loadingVueJsApp() {
+        return (ctx) -> {
+            String url = ctx.getPathWithoutPrefix();
+            File file = new File("");
+            if (url == ""){
+                file = new File(getClass().getClassLoader().getResource("dist/index.html").getFile());
+            }else{
+                file = new File(getClass().getClassLoader().getResource("dist" + url).getFile());
+            }
+            FileInputStream inFile = new FileInputStream(file);
+            ByteBuf b = Unpooled.copiedBuffer(inFile.readAllBytes());
+            inFile.close();
+            return ctx.setResponse(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, b));
+        };
+    }
+
 
 }

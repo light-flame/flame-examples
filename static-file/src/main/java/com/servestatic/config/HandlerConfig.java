@@ -18,6 +18,8 @@ public class HandlerConfig {
             FlameHttpStore fs =  new FlameHttpStore("");
 
             fs.httpGET("/*", handler.simpleStatic());
+            fs.httpGET("/vuejs", handler.loadingVueJsApp());
+            fs.httpGET("/static/*", handler.loadingVueJsApp());
             fs.httpGET("/index", handler.loadingResourceStaticFunc());
 
             return null;

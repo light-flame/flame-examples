@@ -3,7 +3,7 @@ package com.helloworld.handler;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
-import io.lightflame.functions.FlameHttpFunction;
+import io.lightflame.http.FlameHttpFunction;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.util.CharsetUtil;

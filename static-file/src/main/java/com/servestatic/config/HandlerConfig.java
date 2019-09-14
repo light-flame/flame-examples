@@ -3,7 +3,7 @@ package com.servestatic.config;
 import com.servestatic.handler.StaticHandler;
 
 import io.lightflame.functions.ConfigFunction;
-import io.lightflame.store.FlameHttpStore;
+import io.lightflame.http.FlameHttpStore;
 
 /**
  * HandlerConfig

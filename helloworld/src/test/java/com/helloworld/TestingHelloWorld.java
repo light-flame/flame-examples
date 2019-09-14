@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import io.lightflame.bootstrap.LightFlame;
-import io.lightflame.http2.FlameHttpServerHandler;
+import io.lightflame.http.HttpServerHandler;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.handler.codec.http.DefaultFullHttpRequest;
@@ -31,7 +31,7 @@ public class TestingHelloWorld {
     public void createChannel(){
         channel = new EmbeddedChannel(
             new HttpResponseDecoder(), 
-            new FlameHttpServerHandler()
+            new HttpServerHandler()
         );
     }
 

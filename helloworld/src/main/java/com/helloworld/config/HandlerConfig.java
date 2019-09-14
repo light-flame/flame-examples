@@ -3,8 +3,9 @@ package com.helloworld.config;
 import com.helloworld.handler.HelloWorldHandler;
 
 import io.lightflame.functions.ConfigFunction;
-import io.lightflame.store.FlameExceptionStore;
-import io.lightflame.store.FlameHttpStore;
+import io.lightflame.http.FlameHttpExceptionStore;
+import io.lightflame.http.FlameHttpStore;
+
 
 /**
  * DefaultConfig
@@ -25,7 +26,7 @@ public class HandlerConfig {
             fs.httpGET("/hello/*", helloHandler.greetingWithQueryUrl());
 
             // exception store
-            new FlameExceptionStore()
+            new FlameHttpExceptionStore()
                 .add(new NullPointerException(), new ExceptionHandler().nullPointer());
 
             return null;

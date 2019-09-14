@@ -3,7 +3,7 @@ package com.servestatic.handler;
 import java.io.File;
 import java.io.FileInputStream;
 
-import io.lightflame.functions.FlameHttpFunction;
+import io.lightflame.http.FlameHttpFunction;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
@@ -11,7 +11,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.util.CharsetUtil;
 
-/**
+/**WebSocketFrameHandler
  * StaticHandler
  */
 public class StaticHandler {

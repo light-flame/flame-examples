@@ -2,7 +2,7 @@ package com.helloworld.config;
 
 import com.helloworld.handler.HelloWorldHandler;
 
-import io.lightflame.functions.ConfigFunction;
+import io.lightflame.bootstrap.ConfigFunction;
 import io.lightflame.http.FlameHttpExceptionStore;
 import io.lightflame.http.FlameHttpStore;
 

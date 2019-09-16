@@ -2,7 +2,7 @@ package com.servestatic.config;
 
 import com.servestatic.handler.StaticHandler;
 
-import io.lightflame.functions.ConfigFunction;
+import io.lightflame.bootstrap.ConfigFunction;
 import io.lightflame.http.FlameHttpStore;
 
 /**

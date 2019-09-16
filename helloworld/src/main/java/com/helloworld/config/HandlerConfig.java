@@ -19,11 +19,11 @@ public class HandlerConfig {
             // flame store
             FlameHttpStore fs =  new FlameHttpStore("/api");
 
-            fs.httpGET("/hello/world/simple", helloHandler.simpleGreeting());
-            fs.httpGET("/hello/{what}", helloHandler.greetingWithPathParam());
-            fs.httpGET("/hello/greeting/with/param", helloHandler.greetingWithQueryUrl());
-            fs.httpGET("/hello/with/header", helloHandler.greetingWithHeader());
-            fs.httpGET("/hello/*", helloHandler.greetingWithQueryUrl());
+            fs.R().httpGET("/hello/world/simple", helloHandler.simpleGreeting());
+            fs.R().httpGET("/hello/{what}", helloHandler.greetingWithPathParam());
+            fs.R().httpGET("/hello/greeting/with/param", helloHandler.greetingWithQueryUrl());
+            fs.R().httpGET("/hello/with/header", helloHandler.greetingWithHeader());
+            fs.R().httpGET("/hello/*", helloHandler.greetingWithQueryUrl());
 
             // exception store
             new FlameHttpExceptionStore()

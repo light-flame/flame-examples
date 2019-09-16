@@ -17,10 +17,10 @@ public class HandlerConfig {
             // flame store
             FlameHttpStore fs =  new FlameHttpStore("");
 
-            fs.httpGET("/*", handler.simpleStatic());
-            fs.httpGET("/vuejs", handler.loadingVueJsApp());
-            fs.httpGET("/static/*", handler.loadingVueJsApp());
-            fs.httpGET("/index", handler.loadingResourceStaticFunc());
+            fs.R().httpGET("/*", handler.simpleStatic());
+            fs.R().httpGET("/vuejs", handler.loadingVueJsApp());
+            fs.R().httpGET("/static/*", handler.loadingVueJsApp());
+            fs.R().httpGET("/index", handler.loadingResourceStaticFunc());
 
             return null;
         };

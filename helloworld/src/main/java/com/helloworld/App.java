@@ -15,6 +15,7 @@ public class App
     {
         new LightFlame()
             .runConfiguration(new HandlerConfig().setDefautHandlers(), null)
+            .addBasicLog4jConfig()
             .start(App.class);
     }
 }

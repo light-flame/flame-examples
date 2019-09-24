@@ -38,7 +38,8 @@ public class TestingHelloWorld {
     @Before
     public void configureLightFlame(){
         new LightFlame()
-            .runConfiguration(new HandlerConfig().setDefautHandlers(), null);
+            .addConfiguration(new HandlerConfig().setDefautHandlers(), null)
+            .startMock(TestingHelloWorld.class);
     }
 
     @Test

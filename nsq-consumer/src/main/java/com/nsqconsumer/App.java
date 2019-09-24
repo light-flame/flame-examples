@@ -1,7 +1,5 @@
-package com.helloworld;
+package com.nsqconsumer;
 
-
-import com.helloworld.config.HandlerConfig;
 
 import io.lightflame.bootstrap.LightFlame;
 
@@ -14,7 +12,6 @@ public class App
     public static void main( String[] args )
     {
         new LightFlame()
-            .runConfiguration(new HandlerConfig().setDefautHandlers(), null)
             .addBasicLog4jConfig()
             .addHttpAndWsListener(8080)
             .start(App.class);

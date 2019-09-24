@@ -4,11 +4,11 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.helloworld</groupId>
-  <artifactId>helloworld</artifactId>
+  <groupId>com.nsqconsumer</groupId>
+  <artifactId>consumer</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>helloworld</name>
+  <name>nsq consumer</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -47,7 +47,7 @@
               <archive>
                 <manifest>
                   <mainClass>
-                        com.helloworld.App
+                        com.nsqconsumer.App
                   </mainClass>
                 </manifest>
               </archive>
@@ -72,9 +72,10 @@
             </goals>
             <configuration>
               <executable>java</executable>
+              <mainClass>com.nsqconsumer.App</mainClass>
               <arguments>
                 <argument>-jar</argument>
-                <argument>${basedir}/target/helloworld-1.0-SNAPSHOT-jar-with-dependencies.jar</argument>
+                <argument>${basedir}/target/consumer-1.0-SNAPSHOT-jar-with-dependencies.jar</argument>
               </arguments>
             </configuration>
           </execution>

@@ -13,7 +13,7 @@ public class App
     {
         new LightFlame()
             .addBasicLog4jConfig()
-            .addHttpAndWsListener(8080)
+            .addNsqConsumer("localhost", 4150)
             .start(App.class);
     }
 }

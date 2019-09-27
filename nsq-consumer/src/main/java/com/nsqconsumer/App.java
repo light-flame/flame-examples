@@ -2,7 +2,6 @@ package com.nsqconsumer;
 
 
 import io.lightflame.bootstrap.LightFlame;
-import io.lightflame.nsqconsumer.BasicNsqConfig;
 
 /**
  * Hello world!
@@ -10,11 +9,11 @@ import io.lightflame.nsqconsumer.BasicNsqConfig;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
+    public static void main(String[] args) {
         new LightFlame()
-            .addBasicLog4jConfig()
-            .addNsqConsumer(new BasicNsqConfig("localhost",9999,"topic1","test"))
-            .start(App.class);
+                .addConfiguration(new Config().setDefautHandlers(), null)
+                .addBasicLog4jConfig()
+                .addHttpAndWsListener(8080)
+                .start(App.class);
     }
 }

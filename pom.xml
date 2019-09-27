@@ -21,6 +21,7 @@
         <module>nsq-consumer</module>
         <module>static-file</module>
         <module>websocket</module>
+        <module>misc</module>
     </modules>
 
     <dependencies>

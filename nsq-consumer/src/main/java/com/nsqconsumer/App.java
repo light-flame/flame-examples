@@ -2,6 +2,7 @@ package com.nsqconsumer;
 
 
 import io.lightflame.bootstrap.LightFlame;
+import io.lightflame.nsqconsumer.BasicNsqConfig;
 
 /**
  * Hello world!
@@ -13,7 +14,7 @@ public class App
     {
         new LightFlame()
             .addBasicLog4jConfig()
-            .addNsqConsumer("localhost", 4150)
+            .addNsqConsumer(new BasicNsqConfig("localhost",9999,"topic1","test"))
             .start(App.class);
     }
 }

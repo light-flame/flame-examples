@@ -5,8 +5,9 @@ import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import io.lightflame.http.FlameHttpFunction;
-import io.lightflame.websocket.FlameWsFunction;
+import io.lightflame.bootstrap.Flame;
+import io.lightflame.http.FlameHttpContext;
+import io.lightflame.websocket.FlameWsContext;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
@@ -22,7 +23,7 @@ public class WsHandler {
 
     private List<String> messages = Arrays.asList( "Hi there, I\"m Fabio and you?", "Nice to meet you", "How are you?", "Not too bad, thanks", "What do you do?", "That\"s awesome", "Codepen is a nice place to stay", "I think you\'re a nice person", "Why do you think that?", "Can you explain?", "Anyway I\'ve gotta go now", "It was a pleasure chat with you", "Time to make a new codepen", "Bye", ":)");
 
-    public FlameHttpFunction loadingResourceStaticFunc() {
+    public Flame<FlameHttpContext, FlameHttpContext> loadingResourceStaticFunc() {
         return (ctx) -> {
             String url = ctx.getPathWithoutPrefix();
             File file = new File("");
@@ -39,9 +40,9 @@ public class WsHandler {
         };
     }
 
-    public FlameWsFunction webSocketFunc() {
+    public Flame<FlameWsContext, FlameWsContext> webSocketFunc() {
         return (ctx) -> {
-            ctx.setResponse(messages.get(i));
+            ctx.setResponse(this.messages.get(i));
             i++;
             return ctx;
         };

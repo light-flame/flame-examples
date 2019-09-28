@@ -38,8 +38,9 @@ public class TestingHelloWorld {
     @Before
     public void configureLightFlame(){
         new LightFlame()
-            .addConfiguration(new HandlerConfig().setDefautHandlers(), null)
-            .startMock(TestingHelloWorld.class);
+                .addConfiguration(new HandlerConfig().setDefautHandlers(), null)
+                .addBasicLog4jConfig()
+                .startMock(TestingHelloWorld.class);
     }
 
     @Test
@@ -47,7 +48,7 @@ public class TestingHelloWorld {
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
                 HttpMethod.GET, 
-                "/api/hello/world/simple",
+                "/api/greeting/world/simple",
                 Unpooled.copiedBuffer("world", CharsetUtil.UTF_8)
         );
         channel.writeInbound(httpRequest);
@@ -64,14 +65,14 @@ public class TestingHelloWorld {
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
                 HttpMethod.GET, 
-                "/api/hello/world"
+                "/api/greeting/myName"
         );
         channel.writeInbound(httpRequest);
 
         // get response
         FullHttpResponse ctx = channel.readOutbound();
         String msg = ctx.content().toString(CharsetUtil.UTF_8);
-        assertEquals(msg.equals("hello world"), true);
+        assertEquals(msg.equals("hello myName"), true);
 
     }
 
@@ -80,7 +81,7 @@ public class TestingHelloWorld {
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
                 HttpMethod.GET, 
-                "/api/hello/greeting/with/param?what=world"
+                "/api/greeting/with//query/param?what=world"
         );
         channel.writeInbound(httpRequest);
 
@@ -95,7 +96,7 @@ public class TestingHelloWorld {
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
                 HttpMethod.GET, 
-                "/api/hello/with/generic?what=world"
+                "/api/greeting/with/generic?what=world"
         );
         channel.writeInbound(httpRequest);
 
@@ -110,7 +111,7 @@ public class TestingHelloWorld {
         FullHttpRequest httpRequest = new DefaultFullHttpRequest(
                 HttpVersion.HTTP_1_1, 
                 HttpMethod.GET, 
-                "/api/hello/with/header"
+                "/api/greeting/with/header"
         );
         httpRequest.headers().add("what", "world");
         channel.writeInbound(httpRequest);

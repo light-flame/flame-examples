@@ -1,0 +1,109 @@
+@charset "UTF-8";
+@-webkit-keyframes waiting {
+  0% {
+    opacity: 0;
+  }
+  35%, 75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes waiting {
+  0% {
+    opacity: 0;
+  }
+  35%, 75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes joltBG {
+  0% {
+    opacity: 0.3;
+  }
+  22%, 26% {
+    opacity: 0.2;
+  }
+  27%, 45% {
+    opacity: 0.4;
+  }
+  46%, 76% {
+    opacity: 0.5;
+  }
+  76%, 78% {
+    opacity: 0.05;
+  }
+  78% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes joltBG {
+  0% {
+    opacity: 0.3;
+  }
+  22%, 26% {
+    opacity: 0.2;
+  }
+  27%, 45% {
+    opacity: 0.4;
+  }
+  46%, 76% {
+    opacity: 0.5;
+  }
+  76%, 78% {
+    opacity: 0.05;
+  }
+  78% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.line-active:after {
+  content: '■';
+  -webkit-animation-name: waiting;
+          animation-name: waiting;
+  -webkit-animation-duration: 1200ms;
+          animation-duration: 1200ms;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+}
+
+.code-wrapper {
+  white-space: pre-wrap;
+  background: #141e1e;
+  color: #dce6e6;
+  margin: 0 auto;
+  line-height: 2px;
+  height: 50vh;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  padding: 1em 1em 1.5em 1em;
+  position: relative;
+  overflow-x: scroll;
+}
+
+.line-wrapper{
+  height: 20px;
+  vertical-align: middle;
+}
+
+.line{
+  display: flex;
+  height: 100%;
+}
+
+body {
+  background: rgba(20, 20, 30, 1);
+  padding: 0em;
+}

@@ -22,6 +22,7 @@
         <module>static-file</module>
         <module>websocket</module>
         <module>misc</module>
+        <module>route-demo</module>
     </modules>
 
     <dependencies>

@@ -1,6 +1,6 @@
 package com.helloworld.config;
 
-import com.helloworld.handler.HelloWorldHandler;
+import com.helloworld.handler.GreetingHandler;
 
 import io.lightflame.bootstrap.ConfigFunction;
 import io.lightflame.http.FlameHttpExceptionStore;
@@ -14,16 +14,16 @@ public class HandlerConfig {
 
     public ConfigFunction setDefautHandlers() {
         return (config) -> {
-            HelloWorldHandler helloHandler = new HelloWorldHandler();
+            GreetingHandler handler = new GreetingHandler();
 
             // flame store
             FlameHttpStore fs =  new FlameHttpStore("/api");
 
-            fs.R().httpGET("/hello/world/simple", helloHandler.simpleGreeting());
-            fs.R().httpGET("/hello/{what}", helloHandler.greetingWithPathParam());
-            fs.R().httpGET("/hello/greeting/with/param", helloHandler.greetingWithQueryUrl());
-            fs.R().httpGET("/hello/with/header", helloHandler.greetingWithHeader());
-            fs.R().httpGET("/hello/*", helloHandler.greetingWithQueryUrl());
+            fs.R().httpGET("/greeting/world/simple", handler.simpleGreeting().and(handler.out()));
+            fs.R().httpGET("/greeting/{what}", handler.greetingWithPathParam().and(handler.out()));
+            fs.R().httpGET("/greeting/with/query/param", handler.greetingWithQueryUrl().and(handler.out()));
+            fs.R().httpGET("/greeting/with/header", handler.greetingWithHeader().and(handler.out()));
+            fs.R().httpGET("/greeting/*", handler.greetingWithQueryUrl().and(handler.out()));
 
             // exception store
             new FlameHttpExceptionStore()

@@ -13,12 +13,13 @@ public class Config {
         return (config) -> {
             WsHandler handler = new WsHandler();
 
+            // http
+            FlameHttpStore httpStore = new FlameHttpStore(8080);
+            httpStore.R().httpGET("/", handler.getRootFile().and(handler.proccess()));
+            httpStore.R().httpGET("/static/*", handler.getOtherFiles().and(handler.proccess()));
 
-            FlameHttpStore httpStore = new FlameHttpStore();
-            httpStore.R().httpGET("/*", handler.loadingResourceStaticFunc());
-
-            // flame store
-            FlameWsStore wsStore =  new FlameWsStore();
+            // websocket
+            FlameWsStore wsStore =  new FlameWsStore(8081);
             wsStore.R().path("/ws", handler.webSocketFunc());
 
             return null;

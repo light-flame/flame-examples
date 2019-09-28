@@ -11,7 +11,7 @@ import io.netty.util.CharsetUtil;
 
 public class Handler {
 
-    public Flame<FlameHttpContext, FlameHttpResponse> simpleGreeting() {
+    Flame<FlameHttpContext, FlameHttpResponse> simpleGreeting() {
         return (ctx) -> {
             String name = ctx.getRequest().content().toString(CharsetUtil.UTF_8);
             String greeting = String.format("hello %s", name);

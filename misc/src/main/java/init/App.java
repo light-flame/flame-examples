@@ -5,8 +5,9 @@ import io.lightflame.bootstrap.LightFlame;
 public class App {
     public static void main( String[] args ) {
         new LightFlame()
-            .addBasicLog4jConfig()
-            .addHttpAndWsListener(8080)
-            .start(App.class);
+                .addBasicLog4jConfig()
+                .addConfiguration(new HandlerConfig().setDefautHandlers(), null)
+                .addHttpAndWsListener(8080)
+                .start(App.class);
     }
 }

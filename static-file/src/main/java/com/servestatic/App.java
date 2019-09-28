@@ -3,6 +3,7 @@ package com.servestatic;
 import com.servestatic.config.HandlerConfig;
 
 import io.lightflame.bootstrap.LightFlame;
+import io.lightflame.http.BasicHttpWsListener;
 
 /**
  * Hello world!
@@ -15,7 +16,7 @@ public class App
         new LightFlame()
             .addConfiguration(new HandlerConfig().setDefautHandlers(), null)
             .addBasicLog4jConfig()
-            .addHttpAndWsListener(8080)
+            .addListener(new BasicHttpWsListener(8080))
             .start(App.class);
     }
 }

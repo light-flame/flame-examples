@@ -1,13 +1,11 @@
 package com.helloworld.handler;
 
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
-import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 import io.lightflame.bootstrap.Flame;
 import io.lightflame.http.FlameHttpContext;
 import io.lightflame.http.FlameHttpResponse;
 import io.netty.buffer.Unpooled;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.util.CharsetUtil;
 
 /**

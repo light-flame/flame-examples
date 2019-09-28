@@ -1,6 +1,7 @@
 package multihttp;
 
 import io.lightflame.bootstrap.LightFlame;
+import io.lightflame.http.BasicHttpWsListener;
 
 public class App 
 {
@@ -8,8 +9,8 @@ public class App
     {
         new LightFlame()
                 .addBasicLog4jConfig()
-                .addHttpAndWsListener(8080)
-                .addHttpAndWsListener(8090)
+                .addListener(new BasicHttpWsListener(8080))
+                .addListener(new BasicHttpWsListener(8090))
                 .start(App.class);
     }
 }

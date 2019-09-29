@@ -1,6 +1,7 @@
 package routing;
 
-import io.lightflame.bootstrap.LightFlame;
+import io.lightflame.bootstrap.FlameCore;
+import io.lightflame.bootstrap.FlameLog4jConfig;
 import io.lightflame.http.BasicHttpWsListener;
 
 public class App 
@@ -8,10 +9,10 @@ public class App
     public static void main( String[] args )
     {
         
-        new LightFlame()
-            .addBasicLog4jConfig()
-            .addListener(new BasicHttpWsListener(8080))
-            .addConfiguration(new HandlerConfig().setDefautHandlers(), null)
-            .start(App.class);
+        new FlameCore()
+                .addConfiguration(new FlameLog4jConfig().basicConfig())
+                .addListener(new BasicHttpWsListener(8080))
+                .addConfiguration(new HandlerConfig().setDefautHandlers())
+                .start(App.class);
     }
 }

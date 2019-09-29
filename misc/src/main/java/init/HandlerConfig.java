@@ -6,15 +6,13 @@ import io.lightflame.http.FlameHttpStore;
 public class HandlerConfig {
 
     public ConfigFunction setDefautHandlers() {
-        return (config) -> {
+        return () -> {
             Handler handler = new Handler();
 
             // flame store
             FlameHttpStore fs =  new FlameHttpStore("/api");
 
             fs.R().httpGET("/hello/world/simple", handler.simpleGreeting());
-
-            return null;
         };
     }
 }

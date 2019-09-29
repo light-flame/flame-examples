@@ -7,7 +7,7 @@ import routing.Handler;
 public class HandlerConfig {
 
     public ConfigFunction setDefautHandlers() {
-        return (config) -> {
+        return () -> {
             Handler handler = new Handler();
 
             // flame store to port 8080
@@ -21,8 +21,6 @@ public class HandlerConfig {
 
             fs2.R().httpGET("/*", handler.simpleGreeting()); // widecard route
             fs2.R().httpGET("/path/to/my/url", handler.simpleGreeting());
-
-            return null;
         };
     }
 }

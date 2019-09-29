@@ -6,7 +6,7 @@ import io.lightflame.http.FlameHttpStore;
 public class HandlerConfig {
 
     public ConfigFunction setDefautHandlers() {
-        return (config) -> {
+        return () -> {
             Handler h = new Handler();
 
             h.inHttp().and(h.outHttp());
@@ -14,8 +14,6 @@ public class HandlerConfig {
             // flame store
             FlameHttpStore  fs  =  new  FlameHttpStore("");
             fs.R().httpGET("/generic/url", null);
-
-            return null;
         };
     }
 }

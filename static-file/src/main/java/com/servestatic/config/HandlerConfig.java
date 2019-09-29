@@ -11,7 +11,7 @@ import io.lightflame.http.FlameHttpStore;
 public class HandlerConfig {
 
     public ConfigFunction setDefautHandlers() {
-        return (config) -> {
+        return () -> {
             StaticHandler handler = new StaticHandler();
 
             // flame store
@@ -21,8 +21,6 @@ public class HandlerConfig {
             fs.R().httpGET("/vuejs", handler.loadingVueJsApp());
             fs.R().httpGET("/static/*", handler.loadingVueJsApp());
             fs.R().httpGET("/index", handler.loadingResourceStaticFunc());
-
-            return null;
         };
     }
 }

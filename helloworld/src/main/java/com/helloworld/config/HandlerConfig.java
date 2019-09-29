@@ -13,7 +13,7 @@ import io.lightflame.http.FlameHttpStore;
 public class HandlerConfig {
 
     public ConfigFunction setDefautHandlers() {
-        return (config) -> {
+        return () -> {
             GreetingHandler handler = new GreetingHandler();
 
             // flame store
@@ -29,7 +29,6 @@ public class HandlerConfig {
             new FlameHttpExceptionStore()
                 .add(new NullPointerException(), new ExceptionHandler().nullPointer());
 
-            return null;
         };
     }
 

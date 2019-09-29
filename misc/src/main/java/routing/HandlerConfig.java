@@ -6,7 +6,7 @@ import io.lightflame.http.FlameHttpStore;
 public class HandlerConfig {
 
     public ConfigFunction setDefautHandlers() {
-        return (config) -> {
+        return () -> {
             Handler handler = new Handler();
 
 
@@ -23,8 +23,6 @@ public class HandlerConfig {
                 .queryRule("name","daniel")
                 .pathRule("name","daniel")
                 .httpALL("/*", handler.simpleGreeting());
-
-            return null;
         };
     }
 }

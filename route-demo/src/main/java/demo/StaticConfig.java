@@ -7,7 +7,7 @@ import io.lightflame.websocket.FlameWsStore;
 public class StaticConfig {
 
     public ConfigFunction setDefautHandlers() {
-        return (config) -> {
+        return () -> {
 
             // http
             StaticHandler sHandler = new StaticHandler();
@@ -18,7 +18,6 @@ public class StaticConfig {
             FlameWsStore wsStore = new FlameWsStore(8081);
             wsStore.R().path("/ws", null);
 
-            return null;
         };
     }
 

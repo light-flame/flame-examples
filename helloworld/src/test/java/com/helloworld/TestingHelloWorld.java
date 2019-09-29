@@ -5,10 +5,12 @@ import static org.junit.Assert.assertEquals;
 
 import com.helloworld.config.HandlerConfig;
 
+import io.lightflame.bootstrap.FlameLog4jConfig;
+import io.lightflame.bootstrap.FlameMock;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.lightflame.bootstrap.LightFlame;
+import io.lightflame.bootstrap.FlameCore;
 import io.lightflame.http.HttpServerHandler;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
@@ -37,10 +39,10 @@ public class TestingHelloWorld {
 
     @Before
     public void configureLightFlame(){
-        new LightFlame()
-                .addConfiguration(new HandlerConfig().setDefautHandlers(), null)
-                .addBasicLog4jConfig()
-                .startMock(TestingHelloWorld.class);
+        new FlameMock()
+                .addConfiguration(new HandlerConfig().setDefautHandlers())
+                .addConfiguration(new FlameLog4jConfig().basicConfig())
+                .start(TestingHelloWorld.class);
     }
 
     @Test

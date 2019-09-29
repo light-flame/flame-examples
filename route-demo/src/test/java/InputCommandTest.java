@@ -12,5 +12,6 @@ public class InputCommandTest {
     public void firstTest() throws Exception{
         CommandHandler ch = new CommandHandler();
         ch.inCommand(mock).apply(MockWsContext.make("open port 8080/tcp"));
+        ch.inCommand(mock).apply(MockWsContext.make("close port 8080"));
     }
 }

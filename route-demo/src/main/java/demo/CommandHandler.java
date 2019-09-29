@@ -2,14 +2,63 @@ package demo;
 
 import io.lightflame.bootstrap.Flame;
 import io.lightflame.bootstrap.LightFlame;
-import io.lightflame.http.BasicHttpWsListener;
 import io.lightflame.websocket.FlameWsContext;
 import io.lightflame.websocket.FlameWsResponse;
+import io.lightflame.websocket.MockWsContext;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CommandHandler {
 
+    interface Command{
+        String execute(LightFlame lf, String msg);
+    }
+
+    class NotFoundCommand implements Command {
+
+        @Override
+        public String execute(LightFlame lf, String msg) {
+            return "command not found";
+        }
+    }
+
+    class OpenPortCommand implements Command {
+
+        Pattern PORT_AND_KIND = Pattern.compile("([A-Za-z]{3,4}[\\/]?[0-9]{4})");
+
+        @Override
+        public String execute(LightFlame lf, String msg) {
+            Matcher m = PORT_AND_KIND.matcher(msg);
+            if (m.find()){
+                String fMsg =  m.group().split("/")[0];
+                Integer port = Integer.parseInt(fMsg);
+//                lf.runListener(port);
+            }
+            return "port already oppened";
+        }
+    }
+
+    class ClosePortCommand implements Command{
+
+        Pattern PORT_PATTERN = Pattern.compile("([0-9]{4})");
+
+
+        @Override
+        public String execute(LightFlame lf, String msg) {
+            Matcher m = PORT_PATTERN.matcher(msg);
+            if (m.find()){
+                String fMsg =  m.group();
+                Integer port = Integer.parseInt(fMsg);
+                lf.closeChannel(port);
+                return "Port close successfully";
+            }
+            return "port already closed";
+        }
+    }
+
     enum CommandKind{
-        OPEN_PORT("open port"),CLOSE_PORT("close port");
+        OPEN_PORT("open port"),CLOSE_PORT("close port"), NOT_FOUND("not found");
         final String value;
         CommandKind(String s) {
             this.value = s;
@@ -22,48 +71,37 @@ public class CommandHandler {
 
     public Flame<FlameWsContext, FlameWsResponse> inCommand(LightFlame lf) {
         return (ctx) -> {
-            String request = ctx.getRequest();
-            Flame<String,String> command = checkCommandKind(lf).apply(request);
-            command.apply(request);
-            return new FlameWsResponse("opa");
+            String msg = getCommandKind()
+                    .and(getCommand())
+                    .apply(ctx.getRequest())
+                    .execute(lf, ctx.getRequest());
+            return new FlameWsResponse(msg);
         };
     }
 
-    Flame<String, Flame<String, String>> checkCommandKind(LightFlame lf) {
-        return (command) -> {
+    Flame<String, CommandKind> getCommandKind() {
+        return (msg) -> {
             for (CommandKind kind : CommandKind.values()){
-                if (command.startsWith(kind.getValue())){
-                    return getCommandFunction(lf).apply(kind);
+                if (msg.startsWith(kind.getValue())){
+                    return kind;
                 }
             }
-            throw new NullPointerException("command not found");
+            return CommandKind.NOT_FOUND;
         };
     }
 
-    Flame<CommandKind, Flame<String, String>> getCommandFunction(LightFlame lf) {
+    Flame<CommandKind, Command> getCommand() {
         return (commandKind) -> {
             switch (commandKind){
                 case OPEN_PORT:
-                    return openPortCommand(lf);
+                    return new OpenPortCommand();
                 case CLOSE_PORT:
-                    return closePortCommand(lf);
+                    return new ClosePortCommand();
+                case NOT_FOUND:
+                    return new NotFoundCommand();
                 default:
-                    throw new NullPointerException("command doesnt exist");
+                    throw new RuntimeException("error getting kind");
             }
-        };
-    }
-
-    Flame<String, String> openPortCommand(LightFlame lf) {
-        return (command) -> {
-            command = command.split(CommandKind.OPEN_PORT.value)[1].trim();
-            lf.runListener(new BasicHttpWsListener(8085));
-            return null;
-        };
-    }
-
-    Flame<String, String> closePortCommand(LightFlame lf) {
-        return (commandKind) -> {
-            return null;
         };
     }
 

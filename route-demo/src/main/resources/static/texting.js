@@ -25,6 +25,15 @@ $(document).ready(function () {
     function sendCommand(){
         var command = $('.line-active').last().text();
         command = command.substr(1, command.length);
+        if (command === ''){
+            executeLine('>');
+        }
+        if (command === 'close'){
+            ws.close();
+            executeLine('>');
+            return;
+        }
+        console.log(command)
         ws.send(command);
     }
 
@@ -33,7 +42,6 @@ $(document).ready(function () {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             sendCommand();
-            executeLine('>');
             return;
         }
         if (keycode == '8') {

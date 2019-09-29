@@ -4,7 +4,6 @@ import io.lightflame.bootstrap.Flame;
 import io.lightflame.bootstrap.LightFlame;
 import io.lightflame.websocket.FlameWsContext;
 import io.lightflame.websocket.FlameWsResponse;
-import io.lightflame.websocket.MockWsContext;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,8 +72,8 @@ public class CommandHandler {
         return (ctx) -> {
             String msg = getCommandKind()
                     .and(getCommand())
-                    .apply(ctx.getRequest())
-                    .execute(lf, ctx.getRequest());
+                    .apply(ctx.message())
+                    .execute(lf, ctx.message());
             return new FlameWsResponse(msg);
         };
     }

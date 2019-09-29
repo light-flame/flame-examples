@@ -1,7 +1,7 @@
 package flamehandler;
 
 import io.lightflame.bootstrap.ConfigFunction;
-import io.lightflame.http.FlameHttpStore;
+import io.lightflame.http.FlameHttp;
 
 public class HandlerConfig {
 
@@ -12,7 +12,7 @@ public class HandlerConfig {
             h.inHttp().and(h.outHttp());
 
             // flame store
-            FlameHttpStore  fs  =  new  FlameHttpStore("");
+            FlameHttp fs  =  new FlameHttp("");
             fs.R().httpGET("/generic/url", null);
         };
     }

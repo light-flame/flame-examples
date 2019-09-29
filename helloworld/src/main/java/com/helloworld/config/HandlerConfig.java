@@ -3,8 +3,8 @@ package com.helloworld.config;
 import com.helloworld.handler.GreetingHandler;
 
 import io.lightflame.bootstrap.ConfigFunction;
+import io.lightflame.http.FlameHttp;
 import io.lightflame.http.FlameHttpExceptionStore;
-import io.lightflame.http.FlameHttpStore;
 
 
 /**
@@ -17,7 +17,7 @@ public class HandlerConfig {
             GreetingHandler handler = new GreetingHandler();
 
             // flame store
-            FlameHttpStore fs =  new FlameHttpStore("/api");
+            FlameHttp fs =  new FlameHttp("/api");
 
             fs.R().httpGET("/greeting/world/simple", handler.simpleGreeting().and(handler.out()));
             fs.R().httpGET("/greeting/{what}", handler.greetingWithPathParam().and(handler.out()));

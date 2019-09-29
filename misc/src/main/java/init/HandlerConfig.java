@@ -1,7 +1,7 @@
 package init;
 
 import io.lightflame.bootstrap.ConfigFunction;
-import io.lightflame.http.FlameHttpStore;
+import io.lightflame.http.FlameHttp;
 
 public class HandlerConfig {
 
@@ -10,7 +10,7 @@ public class HandlerConfig {
             Handler handler = new Handler();
 
             // flame store
-            FlameHttpStore fs =  new FlameHttpStore("/api");
+            FlameHttp fs =  new FlameHttp("/api");
 
             fs.R().httpGET("/hello/world/simple", handler.simpleGreeting());
         };

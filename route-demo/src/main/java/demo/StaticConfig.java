@@ -2,8 +2,8 @@ package demo;
 
 import io.lightflame.bootstrap.ConfigFunction;
 import io.lightflame.bootstrap.LightFlame;
-import io.lightflame.http.FlameHttpStore;
-import io.lightflame.websocket.FlameWsStore;
+import io.lightflame.http.FlameHttp;
+import io.lightflame.websocket.FlameWs;
 
 public class StaticConfig {
 
@@ -18,12 +18,12 @@ public class StaticConfig {
 
             // http
             StaticHandler sHandler = new StaticHandler();
-            FlameHttpStore httpStore = new FlameHttpStore(8080); // 3
+            FlameHttp httpStore = new FlameHttp(8080); // 3
             httpStore.R().httpGET("/", sHandler.getRootFile().and(sHandler.proccess())); // 4
             httpStore.R().httpGET("/static/*", sHandler.getOtherFiles().and(sHandler.proccess())); // 5
 
             CommandHandler cHandler = new CommandHandler();
-            FlameWsStore wsStore = new FlameWsStore(8080);
+            FlameWs wsStore = new FlameWs(8080);
             wsStore.R().path("/ws", cHandler.inCommand(flame));
 
         };

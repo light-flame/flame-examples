@@ -1,7 +1,6 @@
 import demo.CommandHandler;
 import io.lightflame.bootstrap.LightFlame;
 import io.lightflame.bootstrap.FlameMock;
-import io.lightflame.websocket.MockWsContext;
 import org.junit.Test;
 
 public class InputCommandTest {
@@ -11,7 +10,7 @@ public class InputCommandTest {
     @Test
     public void firstTest() throws Exception{
         CommandHandler ch = new CommandHandler();
-        ch.inCommand(mock).apply(MockWsContext.make("open port 8080/tcp"));
-        ch.inCommand(mock).apply(MockWsContext.make("close port 8080"));
+//        ch.inCommand(mock).apply(new FlameWsContextMock("open port 8080/tcp"));
+//        ch.inCommand(mock).apply(MockWsContext("close port 8080"));
     }
 }

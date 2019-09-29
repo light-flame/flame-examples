@@ -3,7 +3,7 @@ package com.servestatic.config;
 import com.servestatic.handler.StaticHandler;
 
 import io.lightflame.bootstrap.ConfigFunction;
-import io.lightflame.http.FlameHttpStore;
+import io.lightflame.http.FlameHttp;
 
 /**
  * HandlerConfig
@@ -15,7 +15,7 @@ public class HandlerConfig {
             StaticHandler handler = new StaticHandler();
 
             // flame store
-            FlameHttpStore fs =  new FlameHttpStore("");
+            FlameHttp fs =  new FlameHttp("");
 
             fs.R().httpGET("/*", handler.simpleStatic());
             fs.R().httpGET("/vuejs", handler.loadingVueJsApp());

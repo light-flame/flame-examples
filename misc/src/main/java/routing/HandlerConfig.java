@@ -1,7 +1,7 @@
 package routing;
 
 import io.lightflame.bootstrap.ConfigFunction;
-import io.lightflame.http.FlameHttpStore;
+import io.lightflame.http.FlameHttp;
 
 public class HandlerConfig {
 
@@ -11,7 +11,7 @@ public class HandlerConfig {
 
 
             // flame store
-            FlameHttpStore  fs  =  new  FlameHttpStore("/api");
+            FlameHttp fs  =  new FlameHttp("/api");
 
             fs.R().httpGET("/*", handler.simpleGreeting()); // widecard route
             fs.R().httpGET("/path/to/my/url", handler.simpleGreeting());

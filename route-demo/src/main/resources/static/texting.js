@@ -5,7 +5,10 @@ $(document).ready(function () {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             $('.line').last().removeClass('line-active');
-            $('.line-wrapper').first().clone().appendTo('.code-wrapper').show();
+            $('.line').first().clone().appendTo('.line-wrapper').show();
+ 
+            var elmnt = document.getElementById("down");
+            elmnt.scrollIntoView();
             return;
         }
         if (keycode == '8') {

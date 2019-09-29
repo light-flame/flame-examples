@@ -69,7 +69,7 @@
 }
 
 .line-active:after {
-  content: '■';
+  content: ' ■';
   -webkit-animation-name: waiting;
           animation-name: waiting;
   -webkit-animation-duration: 1200ms;
@@ -80,21 +80,21 @@
           animation-timing-function: ease-in-out;
 }
 
+
+
 .code-wrapper {
-  white-space: pre-wrap;
   background: #141e1e;
   color: #dce6e6;
   margin: 0 auto;
-  line-height: 2px;
   height: 50vh;
   font-family: Monaco, Consolas, "Lucida Console", monospace;
   padding: 1em 1em 1.5em 1em;
   position: relative;
   overflow-x: scroll;
+  
 }
 
 .line-wrapper{
-  height: 20px;
   vertical-align: middle;
 }
 

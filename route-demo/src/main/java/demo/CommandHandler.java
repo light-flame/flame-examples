@@ -3,7 +3,6 @@ package demo;
 import io.lightflame.bootstrap.Flame;
 import io.lightflame.bootstrap.LightFlame;
 import io.lightflame.websocket.FlameWsContext;
-import io.lightflame.websocket.FlameWsResponse;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -68,13 +67,14 @@ public class CommandHandler {
         }
     }
 
-    public Flame<FlameWsContext, FlameWsResponse> inCommand(LightFlame lf) {
+    public Flame<FlameWsContext, FlameWsContext> inCommand(LightFlame lf) {
         return (ctx) -> {
             String msg = getCommandKind()
                     .and(getCommand())
                     .apply(ctx.message())
                     .execute(lf, ctx.message());
-            return new FlameWsResponse(msg);
+            ctx.writeToChannel(msg);
+            return ctx;
         };
     }
 

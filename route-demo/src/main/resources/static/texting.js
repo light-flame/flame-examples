@@ -25,8 +25,9 @@ $(document).ready(function () {
     function sendCommand(){
         var command = $('.line-active').last().text();
         command = command.substr(1, command.length);
-        if (command === ''){
+        if (command === '' || command === null){
             executeLine('>');
+            return;
         }
         if (command === 'close'){
             ws.close();

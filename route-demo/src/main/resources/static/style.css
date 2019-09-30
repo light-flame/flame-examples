@@ -80,18 +80,27 @@
           animation-timing-function: ease-in-out;
 }
 
-
-
 .code-wrapper {
   background: #141e1e;
   color: #dce6e6;
   margin: 0 auto;
-  height: 80vh;
+  height: calc(100vh - 80px);
   font-family: Monaco, Consolas, "Lucida Console", monospace;
   padding: 1em 1em 1.5em 1em;
   position: relative;
-  overflow-x: scroll;
-  
+  overflow-y: scroll;
+}
+
+.debug-wrapper {
+  background: #2f1e26;
+  color: #dce6e6;
+  margin: 0 auto;
+  border-top: white;
+  height: 30px;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  padding: 0.3em;
+  position: relative;
+  overflow-y: scroll;
 }
 
 .line-wrapper{
@@ -103,7 +112,7 @@
   height: 100%;
 }
 
+html,
 body {
-  background: rgba(20, 20, 30, 1);
-  padding: 0em;
+    min-height: 100vh;
 }

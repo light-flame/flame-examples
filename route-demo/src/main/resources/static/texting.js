@@ -8,17 +8,22 @@ $(document).ready(function () {
         elmnt.scrollIntoView();
     }
 
+    function executeDebugLine(txt){
+//        $('.debug-line').first().clone().appendTo('.debug-wrapper').show();
+        $('.debug-line').last().text(txt);
+
+    }
+
     var ws = new WebSocket("ws://localhost:8080/ws");
 
     ws.onopen = function() {
-      executeLine('You are connected... Lets start!?');
-      executeLine('>');
-      //ws.send("intro");
+      executeDebugLine('You are connected... Lets start!?');
     };
+
 
     ws.onmessage = function (evt) {
       var received_msg = evt.data;
-      executeLine(received_msg);
+      executeDebugLine(received_msg);
       executeLine('>');
     };
 

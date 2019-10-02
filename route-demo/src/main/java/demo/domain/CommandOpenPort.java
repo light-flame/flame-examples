@@ -35,7 +35,7 @@ public class CommandOpenPort implements Command{
             return false;
         }
         if (kind.equals("http")){
-            lightFlame.runListener(new BasicHttpWsListener(port));
+            lightFlame.addListener(new BasicHttpWsListener(port));
         }
         return true;
     }

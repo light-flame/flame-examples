@@ -61,8 +61,12 @@ $(document).ready(function () {
             return;
         }
 
-        const char = String.fromCharCode(event.which).toLowerCase();
-        $('.line-active').last().append(document.createTextNode(char));
+        if (e.key.length > 1){
+            return;
+        }
+
+        const char = String.fromCharCode(e.key).toLowerCase();
+        $('.line-active').last().append(document.createTextNode(e.key));
     });
 
 

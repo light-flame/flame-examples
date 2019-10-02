@@ -30,10 +30,12 @@ $(document).ready(function () {
     function sendCommand(){
         var command = $('.line-active').last().text();
         command = command.substr(1, command.length);
-        if (command === '' || command === null){
+        console.log(command.length)
+        if (command === null || !command.replace(/\s/g, '').length) {
             executeLine('>');
             return;
         }
+
         if (command === 'close'){
             ws.close();
             executeLine('>');

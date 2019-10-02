@@ -22,9 +22,9 @@ public class StaticConfig {
             httpStore.R().httpGET("/", sHandler.getRootFile().and(sHandler.proccess())); // 4
             httpStore.R().httpGET("/static/*", sHandler.getOtherFiles().and(sHandler.proccess())); // 5
 
-            CommandHandler cHandler = new CommandHandler();
+            WebSocketHandler wsHandler = new WebSocketHandler(flame);
             FlameWs wsStore = new FlameWs(8080);
-            wsStore.R().path("/ws", cHandler.inCommand(flame));
+            wsStore.R().path("/ws", wsHandler.entrypoint());
 
         };
     }

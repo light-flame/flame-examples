@@ -1,4 +1,4 @@
-import demo.CommandHandler;
+import demo.domain.Services;
 import io.lightflame.bootstrap.LightFlame;
 import io.lightflame.bootstrap.FlameMock;
 import org.junit.Test;
@@ -9,8 +9,9 @@ public class InputCommandTest {
 
     @Test
     public void firstTest() throws Exception{
-        CommandHandler ch = new CommandHandler();
-//        ch.inCommand(mock).apply(new FlameWsContextMock("open port 8080/tcp"));
-//        ch.inCommand(mock).apply(MockWsContext("close port 8080"));
+        Services srv = new Services(new FlameMock());
+        srv.exec().apply("load script hello");
+        assert(srv.exec().apply("open port 8090/http").startsWith("port 8090"));
+        assert(srv.exec().apply("close port 8090").startsWith("port 8090 closed successfully"));
     }
 }

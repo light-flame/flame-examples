@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <flame-version>0.11.0</flame-version>
+        <flame-version>0.12.0</flame-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>

@@ -112,6 +112,17 @@
   height: 100%;
 }
 
+.input {
+    background: transparent;
+    color: white;
+    font-size: 19px;
+    border: transparent;
+}
+
+.input-holder{
+background-color: red;
+}
+
 html,
 body {
     min-height: 100vh;

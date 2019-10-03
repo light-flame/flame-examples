@@ -20,6 +20,9 @@ public class Util {
         if (request.startsWith("close port")){
             return new CommandClosePort(request, lightFlame);
         }
+        if (request.startsWith("connect")){
+            return new CommandConnectAll(request, lightFlame);
+        }
         return null;
     }
 }

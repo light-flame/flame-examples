@@ -12,7 +12,7 @@ public class CommandOpenPort implements Command{
     private String kind;
     private LightFlame lightFlame;
 
-    Pattern PORT_AND_KIND = Pattern.compile("([0-9]{4}[\\/]?[A-Za-z]{3,4})");
+    private Pattern PORT_AND_KIND = Pattern.compile("([0-9]{4}[\\/]?[A-Za-z]{3,4})");
 
     public CommandOpenPort(String request, LightFlame lf) {
         lightFlame = lf;

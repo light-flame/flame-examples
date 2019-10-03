@@ -45,6 +45,13 @@ $(document).ready(function () {
         ws.send(command);
     }
 
+    $("html").bind("paste", function(e){
+        // access the clipboard using the api
+        var pastedData = e.originalEvent.clipboardData.getData('text');
+        $('.line-active').last().append(document.createTextNode(pastedData));
+        e.preventDefault();
+    } );
+
     $('html').keyup(function (e) {
 
         var keycode = (event.keyCode ? event.keyCode : event.which);

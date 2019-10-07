@@ -10,7 +10,6 @@ import io.lightflame.bootstrap.FlameMock;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.lightflame.bootstrap.FlameCore;
 import io.lightflame.http.HttpServerHandler;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
